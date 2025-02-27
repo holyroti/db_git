@@ -1,0 +1,65 @@
+<!-- 8 bit icons: downloaden https://www.flaticon.com/search?word=8%20bit%20logout-->
+
+<mat-toolbar class="toolbar row  bg-transparent col-12">
+  
+  <!-- User Info -->
+  <div class="user-info col-3" (click)="openProfilePicSelectDialog()">
+    <img [src]="userIcon" alt="User Avatar" class="avatar" />
+    <span>{{ username }}</span>
+  </div>
+  
+
+  <!-- Progress and Achievements -->
+  <div class="progress-and-achievements col-5">
+    <button mat-icon-button (click)="openAchievements()" title="Achievements" class="toolbar-actions">
+      <mat-icon>emoji_events</mat-icon>
+    </button>
+    <mat-progress-bar class="progress-bar" mode="determinate" [value]="progress"></mat-progress-bar>
+  </div>
+
+  <!-- Other Action Buttons -->
+  <div class="toolbar-actions col-4">
+    <span class="col-1">
+      <button mat-icon-button (click)="navigateHome()" title="Home" class="toolbar-actions">
+        <mat-icon>home</mat-icon>
+      </button>
+    </span>
+    
+    <span class="col-1">
+      <button mat-icon-button (click)="openInfo()" title="Information" class="toolbar-actions">
+        <mat-icon>info</mat-icon>
+      </button>
+    </span>
+    
+    <span class="col-1">
+      <button mat-icon-button (click)="openSettings()" title="Settings" class="toolbar-actions">
+        <mat-icon>settings</mat-icon>
+      </button>  
+    </span>
+
+    <span class="col-1">
+      <button mat-icon-button (click)="openSettings()" title="Menu" class="toolbar-actions">
+        <mat-icon>menu</mat-icon>
+      </button>  
+    </span>
+
+    <span class="col-2">
+
+    </span>
+
+    <span class="col-1 warn"> 
+      <button mat-icon-button (click)="logout()" title="Logout" class="toolbar-actions logout">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </span>
+  </div>
+</mat-toolbar>
+
+<!-- Information Modal -->
+<div *ngIf="showInfo" class="modal-overlay" (click)="closeInfo()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>About the Game</h2>
+    <p>This game is designed to help you practice database normalization using Parsons Problems!</p>
+    <button mat-button color="primary" (click)="closeInfo()">Close</button>
+  </div>
+</div>

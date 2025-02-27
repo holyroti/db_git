@@ -1,0 +1,35 @@
+<div class="professor-modal" *ngIf="showProfessorModal" cdkDrag>
+    <!-- Drag Handle (can be used to move the modal) -->
+    <div class="modal-header" cdkDragHandle>
+      <h3>{{ professorName }}</h3>
+      <button class="close-btn" (click)="toggleProfessorModal()">×</button>
+    </div>
+  
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <img [src]="currentDialogue.character || characterImage" class="professor-avatar" />
+  
+      <p class="dialogue-text">{{ currentDialogue.text }}</p>
+  
+      <!-- Optional Table -->
+      <table *ngIf="currentDialogue.table">
+        <thead>
+          <tr>
+            <th *ngFor="let header of currentDialogue.table.headers">{{ header }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of currentDialogue.table.rows">
+            <td *ngFor="let cell of row">{{ cell }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Navigation Buttons -->
+      <div class="navigation-buttons">
+        <button (click)="previousDialogue()" [disabled]="currentDialogueIndex === 0">Vorige</button>
+        <button (click)="nextDialogue()" [disabled]="currentDialogueIndex === dialogues.length - 1">Volgende</button>
+      </div>
+    </div>
+  </div>
+  

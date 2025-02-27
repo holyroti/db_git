@@ -1,0 +1,187 @@
+<!-- Cheat Button (Show Answer) -->
+<div style="text-align: center; margin: 20px;">
+  <button class="btn btn-primary" (click)="runCheat()">Show Answer</button>
+</div>
+
+<!-- Tutorial Button (opens Game Modal) -->
+<div style="text-align: center; margin: 20px;">
+  <button class="btn btn-primary" (click)="openGameModal()">Tutorial</button>
+</div>
+
+<!-- Header Section -->
+<div class="game" *ngIf="currentQuestion">
+  <div class="row">
+    <div class="col-12">
+      <h2>{{ currentQuestion.QUESTION }}</h2>
+    </div>
+  </div>
+</div>
+
+<!-- Table-show-hide Section -->
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <div class="table-show-hide">
+      <div class="sliding-div" [class.show]="showTable">
+        <div [innerHTML]="currentQuestion?.HTML_CONTENT || ''" class="modal-table-content styled-dynamic-content"></div>
+      </div>
+      <div class="button-container">
+        <button class="btn-primary" (click)="toggleTable()">
+          {{ showTable ? 'Hide' : 'Show' }}
+          <img src="/assets/images/table.png" class="table-icon" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 center-items"></div>
+</div>
+
+<!-- Instruction Modal -->
+<app-app-modal
+  [titleInstruction]="instructionModalTitle" 
+  [contentInstruction]="instructionModalContent" 
+  [showModalInstruction]="showInstructionModal" 
+  (closeModalInstruction)="closeInstructionModal()">
+</app-app-modal>
+
+<!-- Summary Modal -->
+<app-app-modal
+  [titleSummary]="SummaryModalTitle" 
+  [contentSummary]="summaryModalContent" 
+  [showModalSummary]="showSummaryModal" 
+  (closeModalSummary)="closeSummaryModal()">
+</app-app-modal>
+
+<!-- Game Modal for Tutorial/Cheat Mode -->
+<app-app-modal
+  [titleGame]="titleGame"
+  [showModalGame]="showModalGame"
+  (closeModalGame)="closeGameModal()">
+  <!-- Content projection: if you want to embed a separate component, add its selector with attribute game-modal-content -->
+  <app-game game-modal-content></app-game>
+</app-app-modal>
+
+<!-- Professor Icon Button -->
+<button class="professor-hint-btn" (click)="professorSpeech.toggleProfessorModal()">
+  <img src="assets/novel/ai/keywise/keywise_waving.png" alt="Professor Keywise" />
+  Hulp van Prof. Splitter
+</button>
+
+<!-- Professor Speech Component -->
+<app-professor-speech 
+  #professorSpeech
+  [dialogues]="splitterDialoges" 
+  [characterImage]="'assets/novel/ai/keywise/keywise_waving.png'" 
+  [professorName]="'Professor Decomposer'">
+</app-professor-speech>
+
+
+
+
+<!-- Step Explanation -->
+<div class="row">
+  <div class="col-12">
+    <div class="question-container blue-animation">
+      <span class="question-text">{{ currentStepText }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Drag & Drop Areas -->
+<div class="row" *ngIf="currentQuestion; else loading">
+  <div class="col-12 d-flex">
+
+    <div class="col-2"> </div>
+<!-- Left Drop List -->
+<div class="col-4">
+  <div class="example-container">
+    <span class="widget-text">Drag from here..</span>
+    <div
+      cdkDropList
+      #leftList="cdkDropList"
+      [cdkDropListData]="codeItems"
+      [cdkDropListConnectedTo]="[rightList]"
+      class="example-list"
+      cdkDropListSortingEnabled
+      (cdkDropListDropped)="onDrop($event)">
+      <div *ngFor="let item of codeItems" cdkDrag class="example-box" [@itemAnimation]
+           [ngClass]="{'item-highlight': feedbackGiven}">
+        {{ item.text }}
+        <div *ngIf="feedbackGiven" class="feedback-text"
+             [ngClass]="{
+               'feedback-correct': highlightedStatus[item.codeLineId] === 'correct',
+               'feedback-incorrect': highlightedStatus[item.codeLineId] === 'incorrect'
+             }">
+          {{ feedbackMessages[item.codeLineId] || 'No feedback available' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Right Drop List -->
+<div class="col-4">
+  <div class="example-container">
+    <span class="widget-text">
+      Drop items here ({{ currentItems.length }} of {{ remainingItems }})...
+    </span>
+    <div
+      cdkDropList
+      #rightList="cdkDropList"
+      [cdkDropListData]="currentItems"
+      [cdkDropListConnectedTo]="[leftList]"
+      class="example-list"
+      cdkDropListSortingEnabled
+      (cdkDropListDropped)="onDrop($event)">
+      <div *ngFor="let item of currentItems" cdkDrag class="example-box" [@itemAnimation]
+           [ngClass]="{'item-highlight': feedbackGiven}">
+        {{ item.text }}
+        <div *ngIf="feedbackGiven" class="feedback-text"
+             [ngClass]="{
+               'feedback-correct': highlightedStatus[item.codeLineId] === 'correct',
+               'feedback-incorrect': highlightedStatus[item.codeLineId] === 'incorrect'
+             }">
+          {{ feedbackMessages[item.codeLineId] || 'No feedback available' }}
+        </div>
+      </div>
+    </div>
+    <div class="progress-indicator">
+      <div class="progress-circle">
+        <span class="progress-value">{{ progressText }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+    <div class="col-4"></div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="loading-text">Loading questions, please wait...</p>
+</ng-template>
+
+<!-- Bottom Buttons -->
+<div class="row">
+  <div class="col-12 d-flex justify-content-center">
+    <div class="button-container d-flex justify-content-center align-items-center">
+      <button class="btn-primary" (click)="toggleInstructionModal()">Show Instructions</button>
+      <button class="btn btn-secondary me-2" (click)="clickResetPuzzle()">Reset Puzzle</button>
+      <button class="btn-primary btn-feedback" (click)="getFeedback()" [ngClass]="{'highlight': highlightGetFeedback}">
+        Get Feedback
+      </button>
+      <button class="btn btn-next" *ngIf="showNextButton" (click)="navigateToNextQuestion()">
+        Next Stage
+      </button>
+      <select class="btn-primary selector" id="question-selector" [(ngModel)]="selectedQuestionID"
+              (change)="loadQuestionDetails(selectedQuestionID)">
+        <option *ngFor="let question of questions" [value]="question.QUESTION_ID">
+          Exercise {{ questions.indexOf(question) + 1 }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,224 @@
+<!-- Button to Start the Tutorial -->
+<div style="margin: 1rem; text-align: center;">
+  <button class="btn btn-primary" (click)="runTutorial()">Cheat</button>
+</div>
+
+<!-- Button to Start the Tutorial -->
+<div style="text-align: center; margin: 20px;">
+  <button class="btn btn-primary" (click)="openTutorialModal()">Tutorial</button>
+</div>
+
+<!-- Header Section -->
+<div class="game" *ngIf="currentQuestion">
+  <div class="row">
+    <div class="col-12">
+      <h2>{{ currentQuestion.title }}</h2>
+    </div>
+  </div>
+</div>
+
+
+<app-app-modal
+  [titleInstruction]="instructionModalTitle" 
+  [contentInstruction]="instructionModalContent" 
+  [showModalInstruction]="showInstructionModal" 
+  (closeModalInstruction)="closeInstructionModal()"
+>
+</app-app-modal>
+<app-app-modal
+  [titleSummary]="SummaryModalTitle" 
+  [contentSummary]="summaryModalContent" 
+  [showModalSummary]="showSummaryModal" 
+  (closeModalSummary)="closeSummaryModal()"
+>
+</app-app-modal>
+
+ <app-app-modal
+ [titleGame]="'Parsons Columns Tutorial'" 
+ [showModalGame]="showModalTutorial"
+  (closeModalGame)="closeTutorialModal()">
+  <app-columngametutorial game-modal-content></app-columngametutorial>
+
+</app-app-modal> 
+
+
+
+
+
+
+<!-- Professor Icon Button and Professor Speech -->
+<button class="professor-hint-btn" (click)="professorSpeech.toggleProfessorModal()">
+  <img src="assets/novel/ai/decomposer/composer_smile.png" alt="Professor Decomposer" />
+  Hulp van Prof. Decomposer
+</button>
+
+
+<!-- Professor Speech Component -->
+<app-professor-speech 
+  #professorSpeech
+  [dialogues]="decomposerDialogues" 
+  [characterImage]="'assets/novel/ai/decomposer/composer_smile.png'" 
+  [professorName]="'Professor Decomposer'">
+</app-professor-speech>
+
+
+<!-- Step Explanation -->
+<div class="row">
+  <div class="col-12">
+    <div class="question-container blue-animation">
+      <span class="question-text">{{ currentStepText }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Table-show-hide Section -->
+<div class="table-show-hide">
+  <div class="sliding-div" [class.show]="showTable">
+    <div [innerHTML]="currentQuestion?.html_content" class="modal-table-content styled-dynamic-content"></div>
+  </div>
+  <div class="button-container">
+    <button class="btn-primary" (click)="toggleTable()"
+            [ngClass]="{'highlight': highlightToggleTableButton}">
+      {{ showTable ? 'Hide' : 'Show' }}
+      <img src="/assets/images/table.png" class="table-icon" />
+    </button>
+  </div>
+</div>
+
+<!-- Draggable Columns Section -->
+<div class="row" *ngIf="currentQuestion; else loading">
+  <div class="col-12 d-flex">
+    <div class="col-2">
+
+    </div>
+  <!-- Available Columns (List A) -->
+<div class="col-4">
+  <div class="example-container">
+    <span class="widget-text">
+      Drag the <span class="drag-number">columns</span> from here..
+    </span>
+    <div class="mb-4 styled-dynamic-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Available Columns</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div
+                cdkDropList
+                #availableList="cdkDropList"
+                id="availableColumnsList"
+                [cdkDropListData]="availableColumns"
+                [cdkDropListConnectedTo]="tableLists"
+                (cdkDropListDropped)="onDrop($event)"
+                class="list-group example-list">
+                <div *ngFor="let column of availableColumns"
+                     cdkDrag
+                     class="list-group-item example-box"
+                     [@itemAnimation]
+                     [ngClass]="{'pk-column': isPrimaryKey(column), 'fk-column': isForeignKey(column)}"
+                     style="font-weight: bold; font-size: 17px;">
+                  {{ column.columnName }}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Table Assignments (List(s) B) -->
+<div class="col-4">
+  <div class="example-container">
+    <span class="widget-text">
+      Drag the columns to construct corresponding <span class="drag-number">tables</span> here..
+    </span>
+    <div *ngFor="let table of currentQuestion.twoNFTables" class="mb-4 styled-dynamic-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Table: {{ table.tableName }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div
+  cdkDropList
+  #tableList="cdkDropList"
+  [id]="table.tableName + 'List'"
+  [cdkDropListData]="columnAssignments[table.tableName]"
+  [cdkDropListConnectedTo]="getConnectedDropListsForTable(table.tableName)"
+  (cdkDropListDropped)="onDrop($event)"
+  class="example-list"
+  style="font-weight: bold;">
+  <div *ngFor="let column of columnAssignments[table.tableName]"
+       cdkDrag
+       class="example-box"
+       [@itemAnimation]
+       [ngClass]="{'pk-column': isPrimaryKey(column), 'fk-column': isForeignKey(column)}">
+    {{ column.columnName }}
+    
+    <div *ngIf="feedbackGiven" class="feedback-text"
+         [ngClass]="{
+           'feedback-correct': highlightedStatus[feedbackKeyForColumn(column, table.tableName)] === 'correct',
+           'feedback-incorrect': highlightedStatus[feedbackKeyForColumn(column, table.tableName)] === 'incorrect'
+         }">
+      {{ feedbackMessages[feedbackKeyForColumn(column, table.tableName)] }}
+    </div>
+  </div>
+</div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+    </div>
+  </div>
+</div>
+
+    
+    <div class="col-4"></div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="loading-text">Loading questions, please wait...</p>
+</ng-template>
+
+<!-- Bottom Buttons -->
+<div class="row">
+  <div class="col-12 d-flex justify-content-center">
+    <div class="button-container d-flex justify-content-center align-items-center">
+      <button class="btn-primary" (click)="toggleInstructionModal()">Show Instructions</button>
+      <button class="btn btn-secondary me-2" (click)="resetPuzzle()">Reset Puzzle</button>
+      <button class="btn-primary btn-feedback" (click)="getFeedback()"
+              [ngClass]="{'highlight': highlightGetFeedback}">
+        Get Feedback
+      </button>
+      <button class="btn btn-next" *ngIf="showNextButton" (click)="navigateToNextQuestion()">
+        Next Stage
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Repeat Tutorial Modal Overlay -->
+<div class="modal-overlay" *ngIf="showRepeatModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Repeat Tutorial?</h2>
+      <button class="close-btn" (click)="showRepeatModal = false">×</button>
+    </div>
+    <div class="modal-body">
+      <p>Would you like to repeat the tutorial?</p>
+      <button class="btn-primary" (click)="repeatTutorial()">Repeat</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<mat-toolbar color="primary" class="toolbar">
+  <!-- User Info -->
+  <div class="user-info" (click)="openProfilePicSelectDialog()">
+    <img src="assets/avatar-placeholder.png" alt="User Avatar" class="avatar" />
+    <span>{{ username }}</span>
+  </div>
+
+  <!-- Progress and Achievements -->
+  <div class="progress-and-achievements">
+    <button mat-icon-button (click)="openAchievements()" title="Achievements">
+      <mat-icon>emoji_events</mat-icon>
+    </button>
+    <mat-progress-bar class="progress-bar" mode="determinate" [value]="progress"></mat-progress-bar>
+
+  
+  </div>
+
+  <!-- Other Action Buttons -->
+  <div class="toolbar-actions">
+    <button mat-icon-button (click)="navigateHome()" title="Home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button (click)="openInfo()" title="Information">
+      <mat-icon>info</mat-icon>
+    </button>
+    <button mat-icon-button (click)="openSettings()" title="Settings">
+      <mat-icon>settings</mat-icon>
+    </button>  
+    <button mat-button color="warn" (click)="logout()">Logout</button>
+  </div>
+</mat-toolbar>
+
+
+<!-- Information Modal -->
+<div *ngIf="showInfo" class="modal-overlay" (click)="closeInfo()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>About the Game</h2>
+    <p>This game is designed to help you practice database normalization using Parsons Problems!</p>
+    <button mat-button color="primary" (click)="closeInfo()">Close</button>
+  </div>
+</div>

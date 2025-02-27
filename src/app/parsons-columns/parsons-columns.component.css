@@ -1,0 +1,945 @@
+/* General Styling */
+body {
+  margin: 0;
+
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  flex-wrap: wrap; /* Allow wrapping if necessary */
+  gap: 15px; /* Space between buttons and dropdowns */
+  max-width: 100%; /* Ensure it doesn’t overflow */
+}
+
+
+
+.btn-primary,
+.btn-secondary {
+  height: 50px; /* Increased height for better visibility */
+  line-height: 50px;
+  text-align: center;
+
+  background-color: #416ac7;
+  color: white;
+  padding: 0 20px; /* Add more padding for longer text */
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  white-space: nowrap; /* Prevent text wrapping */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+
+}
+
+button {
+  min-width: 120px; /* Ensure buttons are wide enough */
+  max-width: 200px; /* Prevent them from getting too wide */
+  text-align: center;
+}
+
+.selector {
+  background-color: white; /* Ensure the dropdown looks consistent */
+  color: black;
+  text-align: center;
+  height: 50px; /* Match button height */
+  line-height: 50px;
+  padding: 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.selector:focus {
+  outline: none;
+  border: 2px solid #007bff; /* Focus border color */
+}
+
+.btn-primary:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-3px);
+
+}
+
+.btn-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+  transform: translateY(-3px);
+
+}
+
+.blue-animation {
+  margin: 15px 0;
+  text-align: center;
+  font-family: "Funnel Display", serif !important;
+ 
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 25px;
+  animation: breathingParsons 10s ease-in-out infinite; /* Apply the animation */
+
+
+}
+
+
+@keyframes breathingParsons {
+  0%, 100% {
+    transform: scale(1); /* Maintains original size */
+  }
+  50% {
+    transform: scale(1.05); /* Slightly larger */
+  }
+}
+
+
+.center-items{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Navigation */
+.navigation-container {
+  
+  background-color: transparent;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-select {
+  margin-right: 10px;
+  color: white;
+}
+
+select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
+select:focus {
+  outline: none;
+  border: 2px solid #007bff;
+}
+
+/* Drop Area Styling */
+.row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.widget-text{
+  font-size: 1.4em;
+  font-weight: 500;
+}
+.example-container {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  min-width: 45%;
+}
+
+.header-with-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.progress-text-right {
+  font-size: 14px;
+  font-weight: bold;
+  color: #416ac7; /* Match your theme */
+  margin-left: 10px;
+}
+
+
+.example-list {
+  min-height: 300px;
+  background-color: #b6d0f9;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --animation: fadeBlink 8s ease-in-out infinite;
+  box-shadow:  0 5px 23px -6px gray;
+
+}
+
+button{
+  box-shadow: 0 4px 2px -2px gray;
+}
+
+.example-box {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1.1em;
+  box-shadow: 0 4px 2px -2px gray;
+  cursor: grab;
+  width: 100%;
+  text-align: center;
+  color: black;
+}
+
+/* Highlighting for Correct/Incorrect Items */
+.correct-item {
+  background-color: #d4edda; /* Light green */
+  border: 2px solid green;
+  color: green;
+}
+
+.incorrect-item {
+  background-color: #f8d7da; /* Light red */
+  border: 2px solid red;
+  color: red;
+}
+
+/* Feedback Container */
+#feedback-container {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #ffdddd;
+  border: 1px solid #ff5c5c;
+  color: red;
+  font-weight: bold;
+  border-radius: 5px;
+}
+/* Tooltip Feedback Styling */
+.feedback-tooltip {
+  position: absolute;
+  top: -30px; /* Position above the item */
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+
+.correct-feedback {
+  background-color: #d4edda; /* Light green background */
+  color: green; /* Green text */
+  border: 1px solid green;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.incorrect-feedback {
+  background-color: #f8d7da; /* Light red background */
+  color: red; /* Red text */
+  border: 1px solid red;
+  border-radius: 5px;
+  overflow: hidden;
+
+}
+
+
+.feedback-bubble {
+  position: absolute;
+  top: 50%; /* Center vertically relative to the dragged item */
+  left: 100%; /* Start just to the right of the item */
+  transform: translateX(10px) translateY(-50%); /* Adjust position slightly right and center vertically */
+  white-space: nowrap;
+  background-color: #f8d7da; /* Light red for incorrect */
+  color: #721c24; /* Dark red text */
+  padding: 3px 6px;
+  border: 1px solid #f5c6cb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-width: 150px; /* Limit the width of the tooltip */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis if text is too long */
+}
+
+@media (max-width: 600px) {
+  .feedback-bubble {
+    max-width: 100px; /* Smaller max width on smaller screens */
+  }
+}
+.feedback-correct {
+  background-color: #d4edda; /* Light green for correct */
+  color: #155724; /* Dark green text */
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;;
+  font-size: 16px;;
+  font-weight: 600;
+}
+
+.feedback-incorrect {
+  background-color: #f8d7da; /* Light red for incorrect */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;;
+  font-size: 16px;;
+  font-weight: 600;
+
+}
+.feedback-text {
+  font-size: 16px; /* Smaller font size for feedback */
+  padding: 2px 5px; /* Padding for better readability */
+  margin-top: 2px; /* Space from the item text */
+  border-radius: 3px; /* Rounded corners */
+  text-align: center; /* Center the text */
+}
+
+
+
+
+.example-box {
+  position: relative;
+  margin-bottom: 10px;
+  padding-top: 20px; /* Leave space for the feedback tooltip */
+}
+.question-container {
+  margin: 15px 0;
+  text-align: center;
+  font-family: "Funnel Display", serif!important;
+
+
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 25px;
+
+  background-color: transparent;
+  color: #ffffff; /* White text */
+}
+
+.progress-text {
+  margin-top: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-next {
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  padding: 0 20px; /* Add padding for consistent sizing */
+  height: 50px; /* Match the height of other buttons */
+  line-height: 50px; /* Align text vertically */
+  font-size: 16px; /* Consistent font size */
+  font-weight: 600; /* Bold text */
+  border-radius: 5px; /* Rounded corners */
+  border: 2px solid #ccc; /* Add border for consistency */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 4px 2px -2px gray; /* Add subtle shadow */
+  white-space: nowrap; /* Prevent text wrapping */
+  min-width: 120px; /* Ensure consistent width */
+  max-width: 200px; /* Prevent it from getting too wide */
+  text-align: center; /* Center align text */
+  margin: 5px; /* Add some spacing */
+}
+
+.btn-next:hover {
+  background-color: #218838; /* Darker green for hover effect */
+  color: white; /* Ensure text remains white */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center buttons */
+  align-items: center; /* Align vertically */
+  flex-wrap: wrap; /* Allow wrapping if needed */
+  gap: 15px; /* Add spacing between buttons */
+  max-width: 100%; /* Prevent overflow */
+}
+
+
+.btn-feedback:hover{
+  background-color: green;
+}
+
+
+.info-container {
+  margin-top: 10px; /* Add spacing between the sortable widget and the info */
+  text-align: center; /* Center-align the information */
+}
+
+.drag-warning {
+  color: red;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+
+
+.drag-number {
+  font-size: 25px; /* Bigger font for emphasis */
+  font-weight: bold; /* Extra emphasis */
+  --color: #007bff; /* Optional: Highlight the number in blue */
+  color: yellow; /* Optional: Highlight the number in blue */
+
+}
+
+/* Progress Tracker Styling */
+/* Progress Tracker Styling */
+.progress-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.progress-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #007bff; /* Blue background */
+  border-radius: 25px; /* Rounded edges for a small oval */
+  width: 100px; /* Smaller oval width */
+  height: 50px; /* Smaller oval height */
+  text-align: center;
+  color: #ffffff; /* White text */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  padding: 5px; /* Minimal padding */
+  border: 2px solid #ccc;
+
+}
+
+.progress-title {
+  font-size: 12px; /* Smaller text for the title */
+  font-weight: bold;
+  margin-bottom: 2px; /* Subtle spacing */
+}
+
+.progress-value {
+  font-size: 16px; /* Main value font size */
+  font-weight: bold;
+}
+
+
+/*table modal*/
+
+.table-icon {
+  margin-left: 8px;
+  width: 30px;
+  height: 30px;
+}
+
+
+/* Table Content */
+.modal-table-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 17px;
+  
+}
+
+
+
+/* Button with Table Icon */
+.btn-primary .table-icon {
+  margin-left: 5px;
+  font-size: 16px; /* Icon size */
+}
+
+
+.sliding-div {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.sliding-div.show {
+  max-height: 500px; /* Adjust based on your content */
+  opacity: 1;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/*sliding button*/
+.sliding-div {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+  color: white;
+}
+
+.sliding-div.show {
+  max-height: 500px; /* Adjust based on your content */
+  opacity: 1;
+}
+
+::ng-deep .styled-dynamic-content span{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+::ng-deep .styled-dynamic-content table {
+  width: 100%;
+  border-collapse: collapse; /* Ensures no gaps between table cells */
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+  margin: 20px auto;
+}
+
+::ng-deep .styled-dynamic-content table th {
+  background-color: #416ac7; /* Same blue as buttons */
+  color: white;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+::ng-deep .styled-dynamic-content table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  color: #333;
+}
+
+::ng-deep .styled-dynamic-content table tr:nth-child(even) td {
+  background-color: #eaf3ff;
+}
+
+::ng-deep .styled-dynamic-content table tr:hover td {
+  background-color: #d4e4ff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+::ng-deep .styled-dynamic-content table th:first-child,
+::ng-deep .styled-dynamic-content table td:first-child {
+  border-top-left-radius: 10px;
+}
+
+::ng-deep .styled-dynamic-content table th:last-child,
+::ng-deep .styled-dynamic-content table td:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Fade-in Animation */
+::ng-deep .styled-dynamic-content table {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+
+
+
+.example-list:hover .discard-hover-area {
+  display: flex;
+}
+
+.discard-button{
+  background-color: red;
+}
+
+.discard-button:hover{
+  background-color: darkred;
+}
+
+
+/* Tooltip text */
+.discard-button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -30px; /* Adjust the position */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: lightcoral;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* Show the tooltip on hover */
+.discard-button:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
+
+
+.table-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+::ng-deep .styled-dynamic-content table td.cdk-drag {
+  cursor: grab;
+  background-color: #f5f5f5; /* Matches other table cells */
+  font-weight: bold;
+}
+
+::ng-deep .styled-dynamic-content table td.cdk-drag:active {
+  cursor: grabbing;
+  background-color: #eaf3ff; /* Highlight when dragging */
+}
+
+
+.example-container {
+  margin: 15px;
+  text-align: center;
+}
+
+.widget-text {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.example-list {
+  display: flex;
+  flex-direction: column;
+  background-color: #eaf3ff;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 100px;
+  max-width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.example-box {
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  text-align: center;
+  cursor: grab;
+}
+
+.example-box:active {
+  cursor: grabbing;
+}
+
+.feedback-text {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+
+.table-header {
+  font-weight: bold;
+  font-size: 16px;
+  color: #416ac7;
+  margin-bottom: 10px;
+}
+
+
+/* Table container and layout */
+.styled-dynamic-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  margin: 20px auto;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styling */
+.styled-dynamic-content table th {
+  background-color: #416ac7; /* Blue header */
+  color: white;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+/* Cell styling */
+.styled-dynamic-content table td {
+  padding: 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternating row colors */
+.styled-dynamic-content table tr:nth-child(even) td {
+  background-color: #eaf3ff; /* Light blue for even rows */
+}
+
+.styled-dynamic-content table tr:nth-child(odd) td {
+  background-color: #ffffff; /* White for odd rows */
+}
+
+/* Hover effect */
+.styled-dynamic-content table tr:hover td {
+  background-color: #d4e4ff;
+  transition: background-color 0.3s ease;
+}
+
+/* Rounded corners for the first and last cells */
+.styled-dynamic-content table th:first-child,
+.styled-dynamic-content table td:first-child {
+  border-top-left-radius: 10px;
+}
+
+.styled-dynamic-content table th:last-child,
+.styled-dynamic-content table td:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Additional spacing for readability */
+.example-container {
+  margin: 15px;
+  text-align: center;
+}
+
+.widget-text {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+
+/* .feedback-correct {
+  font-size: 12px;
+  margin-top: 4px;
+
+  background-color: #d4edda !important; /* Light green 
+  border: 2px solid green;
+  color: green;
+
+} 
+
+/* .feedback-incorrect {
+
+  font-size: 12px;
+  margin-top: 4px;
+
+  background-color: #f8d7da !important; /* Light red 
+    border: 2px solid red;
+    color: red;
+} 
+*/
+
+.pk-column {
+  font-weight: bold;
+  font-size: 17px;
+  background-color: #a6c2ff;
+
+}
+
+
+.fk-column {
+  background-color: #eaf98f;
+
+  font-style: italic;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+.example-box .feedback-text {
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.references-info {
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #4698f0;
+
+}
+
+.references-info >span{
+  font-size: 15px;
+}
+
+.feedback-text {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+
+
+/* General table styling */
+.styled-dynamic-content table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.styled-dynamic-content table th {
+  background-color: #416ac7;
+  color: white;
+  padding: 12px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.styled-dynamic-content table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Alternating row colors */
+.styled-dynamic-content table tr.even-row td {
+  background-color: #eaf3ff;
+}
+
+.styled-dynamic-content table tr.odd-row td {
+  background-color: #ffffff;
+}
+
+/* Hover effect for rows */
+.styled-dynamic-content table tr:hover td {
+  background-color: #d4e4ff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.professor-hint-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.professor-hint-btn img {
+  height: 40px;
+}
+
+
+/* Highlight style for Toggle Table and Get Feedback buttons */
+.highlight {
+  animation: pulse 2s infinite;
+  border: 2px solid #ff0;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Highlight style for each column item in drop zone B when feedback is given */
+.item-highlight {
+  animation: itemPulse 2s infinite;
+}
+
+@keyframes itemPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Repeat Tutorial Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: rgb(136, 169, 230);
+  border-radius: 8px;
+  padding: 20px;
+  width: 80vw;
+  max-width: 500px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+  color: white;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: yellow;
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Table, list, and other styles remain as defined in your existing CSS */
+

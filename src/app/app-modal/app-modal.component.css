@@ -1,0 +1,130 @@
+/*modal overlay*/
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;           /* Prevent modal content from touching screen edges */
+  overflow: auto;          /* Allow scrolling if modal content is tall */
+}
+.modal-content {
+  background-color: rgb(136, 169, 230);
+  border-radius: 8px;
+  padding: 20px;
+  width: 90vw;             /* 90% of viewport width */
+  --max-width: 500px;        /* Maximum width */
+  max-height: 90vh;        /* Maximum height is 90% of viewport height */
+  overflow-y: auto;        /* Enable vertical scrolling if needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+  color: white;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Modal Body */
+.modal-body {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  /* Remove overflow-y and max-height to let the modal show its full content */
+  height: auto;
+  padding-right: 10px;
+  flex-grow: 1;
+  display: block;
+}
+
+
+/* Modal Table Content */
+/* Modal Table Content */
+/* Modal Table Content */
+.modal-table-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 17px;
+  /* Remove overflow-y and max-height so that the table displays at its full height */
+  height: auto;
+}
+
+/* Close Button */
+/* Close Button */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: yellow;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+/* Fade-in Animation */
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Table Styling */
+::ng-deep .styled-dynamic-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
+  margin: 20px auto;
+}
+
+::ng-deep .styled-dynamic-content table th {
+  background-color: #416ac7;
+  color: white;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+::ng-deep .styled-dynamic-content table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  color: #333;
+}
+
+::ng-deep .styled-dynamic-content table tr:nth-child(even) td {
+  background-color: #eaf3ff;
+}
+
+::ng-deep .styled-dynamic-content table tr:hover td {
+  background-color: #d4e4ff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}

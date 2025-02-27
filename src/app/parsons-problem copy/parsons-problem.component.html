@@ -1,0 +1,188 @@
+
+
+<div class="parsons-header">
+  <app-toolbar></app-toolbar>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-3">
+
+  </div>
+  <div class="col-6">
+      <div class="question-container example-b0x blue-animation">
+        <span *ngIf="currentQuestion">{{ currentQuestion.question }}</span>
+        <!-- Progress Tracker -->
+        
+      </div>
+      
+      <div class="table-show-hide">
+        <!-- Sliding Div -->
+        <div class="sliding-div" [class.show]="showTable">
+          <div [innerHTML]="currentQuestion?.html_content" class="modal-table-content styled-dynamic-content"></div>
+        </div>
+      
+        <!-- Toggle Button -->
+        <div class="button-container">
+          <button class="btn-primary" (click)="toggleTable()">
+            {{ showTable ? 'Hide' : 'Show' }}
+            <img src="/assets/images/table.png" class="table-icon" />
+          </button>
+        </div>
+      </div>
+
+    
+
+    
+
+      <!-- <p *ngIf="currentQuestion?.hints" class="progress-text">Hints: {{ currentQuestion?.hints }}</p> -->
+  </div>
+  
+ 
+
+  <div class="col-3 center-items">
+    
+    
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-12 d-flex" *ngIf="currentQuestion; else loading">
+    <div class="col-2"></div>
+   
+    <div class="col-4">
+      <div class="example-container">
+        <!-- Dynamic Label -->
+        <span class="widget-text">
+          Drag  from here..
+        </span>
+        <div
+          cdkDropList
+          id="trashList"
+          [cdkDropListData]="currentQuestion.code || []"
+          [cdkDropListConnectedTo]="['sortableList']"
+          class="example-list"
+          cdkDropListSortingEnabled
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let item of currentQuestion?.code" cdkDrag class="example-box">
+            {{ item.text }}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-4">
+      <div class="example-container">
+        <span class="widget-text">
+          Drop <span class="drag-number">{{ remainingItems }}</span> items here..
+        </span>        <div
+          cdkDropList
+          id="sortableList"
+          [cdkDropListData]="currentItems"
+          [cdkDropListConnectedTo]="['trashList']"
+          class="example-list"
+          cdkDropListSortingEnabled
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let item of currentItems" cdkDrag class="example-box">
+            {{ item.text }}
+            <div *ngIf="feedbackGiven" class="feedback-text"
+                 [ngClass]="{
+                   'feedback-correct': highlightedStatus[item.codeLineId] === 'correct',
+                   'feedback-incorrect': highlightedStatus[item.codeLineId] === 'incorrect'
+                 }">
+              {{ feedbackMessages[item.codeLineId] }}
+            </div>
+          </div>
+        </div>
+     
+        
+        <div class="progress-indicator">
+          <div class="progress-circle">
+            <span class="progress-value">{{ progressText }}</span>
+          </div>
+        </div>
+        
+    
+
+
+      
+    </div>
+    
+    
+
+    <div class="col-2"></div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  
+
+
+  
+  <ng-template #loading>
+    <p class="loading-text">Loading questions, please wait...</p>
+  </ng-template>
+
+  <div *ngIf="questions.length === 0">
+    <p>No questions available for this section.</p>
+  </div>
+
+ 
+
+
+
+</div>
+
+ 
+<div class="row"></div>
+
+<div class="row">
+  <div class="col-12 d-flex justify-content-center">
+    <div class="button-container d-flex justify-content-center align-items-center">
+    
+      
+      <button class="btn-secondary" (click)="resetPuzzle()">Shuffle Puzzle</button>
+      <button class="btn-primary btn-feedback" (click)="getFeedback()">Get Feedback</button>
+      <button class="btn-next" *ngIf="showNextButton" (click)="navigateToNextQuestion()">Next Question</button>
+
+      <!-- Section Selector -->
+      <select class="btn-primary selector" id="section-selector" [(ngModel)]="selectedSection" (change)="loadQuestionsBySection()">
+        <option *ngFor="let section of sections" [value]="section.id">{{ section.name }}</option>
+      </select>
+
+      <!-- Question Selector -->
+      <select class="btn-primary selector" id="question-selector" [(ngModel)]="selectedQuestionID" (change)="loadQuestionDetails(selectedQuestionID)">
+        <option *ngFor="let question of questions" [value]="question.question_id">Exercise {{ questions.indexOf(question) + 1 }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="row"></div>
+

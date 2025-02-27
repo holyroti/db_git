@@ -1,0 +1,219 @@
+<div *ngIf="loading" class="loading-indicator">
+  Loading question...
+</div>
+
+<!-- Current Question -->
+<div class="row mt-4">
+  <div class="col-12 d-flex justify-content-center blue-animation"  *ngIf="!loading && currentQuestion">
+    <div class="question-card blue-animation">
+      <div class="question-header">
+        <div class="current-question question-container blue-animation">
+          <h2>{{ currentQuestion?.question }}</h2>
+        </div>
+      </div>
+      <div class="question-body"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Button for Cheat (Auto-solve) -->
+<div style="text-align: center; margin: 20px;">
+  <button class="btn btn-primary" (click)="runCheat()">Cheat</button>
+</div>
+
+
+<!-- Button to Start the Tutorial -->
+<div style="text-align: center; margin: 20px;">
+  <button class="btn btn-primary" (click)="openTutorialModal()">Tutorial</button>
+</div>
+
+<app-app-modal
+[titleGame]="'Parsons Columns Tutorial'" 
+[showModalGame]="showModalTutorial"
+ (closeModalGame)="closeTutorialModal()">
+ <app-blankgametutorial game-modal-content></app-blankgametutorial>
+
+</app-app-modal> 
+
+<!-- Professor Icon Button -->
+<button class="professor-hint-btn" (click)="professorSpeech.toggleProfessorModal()">
+  <img src="assets/novel/ai/keywise/keywise_waving.png" alt="Professor Keywise" />
+  Hulp van Prof. Decomposer
+</button>
+
+<!-- Professor Speech Component -->
+<app-professor-speech 
+  #professorSpeech
+  [dialogues]="keyWiseDialogues" 
+  [characterImage]="'assets/novel/ai/keywise/keywise_waving.png'" 
+  [professorName]="'Professor Decomposer'">
+</app-professor-speech>
+
+
+
+<!-- Table Show/Hide -->
+<div class="table-show-hide">
+  <!-- Sliding Div -->
+  <div class="sliding-div" [class.show]="showTable">
+    <div [innerHTML]="currentQuestion?.htmlCode" class="modal-table-content styled-dynamic-content"></div>
+  </div>
+
+  <!-- Toggle Button -->
+  <div class="button-container">
+    <button class="btn-primary" (click)="toggleTable()">
+      {{ showTable ? 'Hide' : 'Show' }}
+      <img src="/assets/images/table.png" class="table-icon" />
+    </button>
+  </div>
+</div>
+
+<!-- Modal for Instructions and Summary -->
+<app-app-modal
+  [titleInstruction]="instructionModalTitle"
+  [contentInstruction]="instructionModalContent"
+  [showModalInstruction]="showInstructionModal"
+  (closeModalInstruction)="closeInstructionModal()"
+></app-app-modal>
+
+<app-app-modal
+  [titleSummary]="SummaryModalTitle"
+  [contentSummary]="summaryModalContent"
+  [showModalSummary]="showSummaryModal"
+  (closeModalSummary)="closeSummaryModal()"
+></app-app-modal>
+
+<!-- Table Inputs -->
+<div class="row d-flex justify-content-center">
+  <div class="col-6">
+    <div class="table-container mt-4 example-container styled-dynamic-content">
+      <div *ngFor="let table of userInputTables; let tableIndex = index" class="table-card">
+        <div class="row align-items-center mb-3">
+          <div class="col-6 text-end widget-text">
+            <span class="drag-number">Let's create our own table {{ tableIndex + 1 }}:</span>
+          </div>
+          <div class="col-3">
+            <select
+              class="form-select btn-primary selector"
+              [(ngModel)]="table.targetTable"
+              (change)="updateSelectedTables(tableIndex)"
+              [disabled]="showAnswers"
+            >
+              <option value="" disabled>Select Table</option>
+              <option *ngFor="let tableName of predefinedTableNames" [value]="tableName" [disabled]="isTableSelected(tableName)">
+                {{ tableName }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Column Name</th>
+                <th>Key Type</th>
+                <th>References</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="table?.columns">
+              <tr *ngFor="let column of table.columns; let columnIndex = index">
+                <td>
+                 <select class="form-select" [(ngModel)]="column.columnName" [disabled]="showAnswers">
+  <option value="" disabled>Select Column</option>
+  <option *ngFor="let colName of availableColumnNames" [value]="colName">
+    {{ colName }}
+  </option>
+  <!-- Optionally, if showing answers, display the solution (using a helper method or guarded ng-container as shown earlier) -->
+</select>
+
+                  <!-- Feedback for column name -->
+                  <div
+                    *ngIf="feedbackGiven"
+                    class="feedback-text mt-1"
+                    [ngClass]="{
+                      'feedback-correct': isFeedbackCorrect(column, table),
+                      'feedback-incorrect': isFeedbackIncorrect(column, table)
+                    }"
+                  >
+                    {{ feedbackMessages[getFeedbackKey(column, table)] }}
+                  </div>
+                </td>
+                <td>
+                  <select class="form-select" [(ngModel)]="column.keyType">
+                    <option value="NONE">None</option>
+                    <option value="PK">Primary Key</option>
+                    <option value="FK">Foreign Key</option>
+                  </select>
+                </td>
+                <td>
+                  <select *ngIf="column.keyType === 'FK'" class="form-select" [(ngModel)]="column.referencesTableId">
+                    <option value="" disabled>Select Reference Table</option>
+                    <option *ngFor="let ref of availableReferences" [value]="ref.id">
+                      {{ ref.name | titlecase }}
+                    </option>
+                  </select>
+                  
+                  
+                </td>
+                
+                
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="removeColumn(tableIndex, columnIndex)"
+                    [disabled]="table.columns.length === 1"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td></td><td></td><td></td>
+                <td>
+                  <button class="btn btn-next" (click)="addColumn(tableIndex)">+ Add Column</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback and Reset -->
+<div class="row">
+  <div class="col-12 d-flex justify-content-center">
+    <div class="button-container d-flex justify-content-center align-items-center">
+      <button class="btn-primary" (click)="toggleInstructionModal()">Show Instructions</button>
+      <button class="btn-secondary" (click)="resetPuzzle()">Reset Puzzle</button>
+      <button class="btn-primary btn-feedback" (click)="getFeedback()">Get Feedback</button>
+      <button
+        class="btn-next me-2"
+        *ngIf="showNextButton"
+        (click)="navigateToNextQuestion()"
+      >
+        Next Question
+      </button>
+
+      <button class="btn-primary" (click)="toggleShowAnswers()">
+        {{ showAnswers ? 'Hide Answers' : 'Show Answers' }}
+      </button>
+
+      <!-- Question Selector -->
+      <select
+        class="btn-primary selector"
+        id="question-selector"
+        [(ngModel)]="selectedQuestionID"
+        (change)="loadBlankDetails(selectedQuestionID || 1)"
+      >
+        <option *ngFor="let question of blankQuestions" [value]="question.questionId">
+          Question {{ question.questionId }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

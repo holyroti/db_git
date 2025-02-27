@@ -1,0 +1,6 @@
+<h1>Select a Profile Picture</h1>
+<div class="profile-pics">
+  <img *ngFor="let pic of data.profilePics" [src]="pic.url" alt="Profile Picture" (click)="selectPicture(pic)">
+</div>
+
+

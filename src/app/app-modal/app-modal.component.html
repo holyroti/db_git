@@ -1,0 +1,39 @@
+<!-- Instruction Modal -->
+<div class="modal-overlay" *ngIf="showModalInstruction">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="d-flex">{{ titleInstruction }}</h2>
+      <button class="close-btn" (click)="closeInstruction()">×</button>
+    </div>
+    <div class="modal-body">
+      <p [innerHTML]="contentInstruction"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Summary Modal -->
+<div class="modal-overlay" *ngIf="showModalSummary">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="d-flex">{{ titleSummary }}</h2>
+      <button class="close-btn" (click)="closeSummary()">×</button>
+    </div>
+    <div class="modal-body styled-dynamic-content">
+      <span [innerHTML]="contentSummary"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Game Modal -->
+<div class="modal-overlay" *ngIf="showModalGame">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="d-flex">{{ titleGame }}</h2>
+      <button class="close-btn" (click)="closeGame()">×</button>
+    </div>
+    <div class="modal-body">
+      <!-- Embed your game or tutorial component via content projection -->
+      <ng-content select="[game-modal-content]"></ng-content>
+    </div>
+  </div>
+</div>

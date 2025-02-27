@@ -1,0 +1,87 @@
+
+<div class="row d-flex">
+
+</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="login-container">
+
+      <h1>Login</h1>
+  <form (submit)="login()">
+    <label for="username">Username</label>
+    <input
+      id="username"
+      type="text"
+      [(ngModel)]="username"
+      name="username"
+      required
+    />
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      required
+    />
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    
+  
+
+
+    
+  <!-- Register Button -->
+  <button class="register-btn" (click)="openRegisterModal()">Register</button>
+
+  <!-- Register Modal -->
+  <div *ngIf="showRegisterModal" class="modal-overlay" (click)="closeRegisterModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Register</h2>
+      <form (submit)="register()">
+        <label for="reg-username">Username</label>
+        <input
+          id="reg-username"
+          type="text"
+          [(ngModel)]="regUsername"
+          name="regUsername"
+          required
+        />
+
+        <label for="reg-displayName">Display Name</label>
+        <input
+          id="reg-displayName"
+          type="text"
+          [(ngModel)]="regDisplayName"
+          name="regDisplayName"
+          required
+        />
+
+        <label for="reg-password">Password</label>
+        <input
+          id="reg-password"
+          type="password"
+          [(ngModel)]="regPassword"
+          name="regPassword"
+          required
+        />
+
+        <button type="submit">Register</button>
+        <button type="button" class="cancel-btn" (click)="closeRegisterModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+  
+

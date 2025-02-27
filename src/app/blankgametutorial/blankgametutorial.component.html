@@ -1,0 +1,173 @@
+<!-- Current Question Header -->
+<!-- Current Question Header -->
+<div class="row mt-4">
+    <div class="col-12 d-flex justify-content-center blue-animation">
+      <div class="question-card blue-animation">
+        <div class="question-header">
+          <div class="current-question question-container blue-animation">
+            <h2>{{ currentQuestion?.question }}</h2>
+            <!-- Display the current simulation step text -->
+            <p class="simulation-step">{{ currentStepText }}</p>
+          </div>
+        </div>
+        <div class="question-body"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Professor Icon Button and Speech -->
+  <button class="professor-hint-btn" (click)="toggleProfessorModal()">
+    <img src="assets/novel/ai/keywise/keywise_waving.png" alt="Professor Keywise" />
+    Hulp van Prof. Decomposer
+  </button>
+  <app-professor-speech 
+    *ngIf="showProfessorModal"
+    [dialogues]="keyWiseDialogues" 
+    [characterImage]="'assets/novel/ai/keywise/keywise_waving.png'" 
+    [professorName]="'Professor Decomposer'">
+  </app-professor-speech>
+  
+  <!-- Table Show/Hide Section -->
+  <div class="table-show-hide">
+    <!-- Sliding Div -->
+    <div class="sliding-div" [class.show]="showTable">
+      <div [innerHTML]="currentQuestion?.htmlCode" class="modal-table-content styled-dynamic-content"></div>
+    </div>
+    <!-- Toggle Button -->
+    <div class="button-container">
+      <button class="btn-primary" (click)="toggleTable()">
+        {{ showTable ? 'Hide' : 'Show' }}
+        <img src="/assets/images/table.png" class="table-icon" />
+      </button>
+    </div>
+  </div>
+  
+  <!-- Instruction & Summary Modals -->
+  <app-app-modal
+    [titleInstruction]="instructionModalTitle" 
+    [contentInstruction]="instructionModalContent" 
+    [showModalInstruction]="showInstructionModal" 
+    (closeModalInstruction)="closeInstructionModal()">
+  </app-app-modal>
+  <app-app-modal
+    [titleSummary]="SummaryModalTitle" 
+    [contentSummary]="summaryModalContent" 
+    [showModalSummary]="showSummaryModal" 
+    (closeModalSummary)="closeSummaryModal()">
+  </app-app-modal>
+  
+  <!-- Table Inputs for the Blank Game -->
+  <div class="row d-flex justify-content-center">
+    <div class="col-6">
+      <div class="table-container mt-4 example-container styled-dynamic-content">
+        <div *ngFor="let table of userInputTables; let tableIndex = index" class="table-card">
+          <div class="row align-items-center mb-3">
+            <div class="col-6 text-end widget-text">
+              <span class="drag-number">Let's create our own table {{ tableIndex + 1 }}:</span>
+            </div>
+            <div class="col-3">
+              <!-- Table select dropdown with highlight -->
+              <select class="form-select btn-primary selector"
+                      [(ngModel)]="table.targetTable"
+                      [ngClass]="{'highlight': highlightTableSelect}">
+                <option value="" disabled>Select Table</option>
+                <option *ngFor="let tableName of predefinedTableNames" [value]="tableName">
+                  {{ tableName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Column Name</th>
+                  <th>Key Type</th>
+                  <th>References</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="table?.columns">
+                <tr *ngFor="let column of table.columns; let columnIndex = index">
+                  <td>
+                    <!-- Column select dropdown with highlight -->
+                    <select class="form-select" [(ngModel)]="column.columnName"
+                            [ngClass]="{'highlight': highlightColumnSelect}">
+                      <option value="" disabled>Select Column</option>
+                      <option *ngFor="let colName of availableColumnNames" [value]="colName">
+                        {{ colName }}
+                      </option>
+                    </select>
+                    <!-- Feedback for column name -->
+                    <div *ngIf="feedbackGiven" class="feedback-text mt-1">
+                      {{ feedbackMessages[column.id] }}
+                    </div>
+                  </td>
+                  <td>
+                    <select class="form-select" [(ngModel)]="column.keyType">
+                      <option value="NONE">None</option>
+                      <option value="PK">Primary Key</option>
+                      <option value="FK">Foreign Key</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select *ngIf="column.keyType === 'FK'" class="form-select" [(ngModel)]="column.referencesTableId">
+                      <option value="" disabled>Select Reference Table</option>
+                      <option *ngFor="let refTable of availableReferences" [value]="refTable">
+                        {{ refTable }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <!-- Remove button (could also highlight on click) -->
+                    <button class="btn btn-danger" (click)="removeColumn(tableIndex, columnIndex)"
+                            [ngClass]="{'highlight': highlightRemoveColumn}">
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="text-align: right;">
+                    <!-- Add Column button with highlight -->
+                    <button class="btn btn-next" (click)="addColumn(tableIndex)"
+                            [ngClass]="{'highlight': highlightAddColumn}">
+                      + Add Column
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Feedback and Reset Buttons -->
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <div class="button-container d-flex justify-content-center align-items-center">
+        <button class="btn-primary" (click)="toggleInstructionModal()">Show Instructions</button>
+        <button class="btn btn-secondary" >Reset Puzzle</button>
+        <button class="btn-primary" (click)="getFeedback()">Get Feedback</button>
+    
+       
+      </div>
+    </div>
+  </div>
+  
+<!-- Repeat Tutorial Modal Overlay -->
+<div class="modal-overlay" *ngIf="showRepeatModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Repeat Tutorial?</h2>
+        <button class="close-btn" (click)="showRepeatModal = false">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Would you like to repeat the tutorial?</p>
+        <button class="btn-primary" (click)="repeatTutorial()">Repeat</button>
+      </div>
+    </div>
+  </div>
+  

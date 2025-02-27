@@ -1,0 +1,643 @@
+/* Styling for question and table section */
+.question-container {
+    background-color: #007bff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .table-show-hide .sliding-div {
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    max-height: 0;
+  }
+  
+  .table-show-hide .sliding-div.show {
+    max-height: 500px; /* Adjust as needed */
+  }
+  
+  .button-container {
+    margin-top: 10px;
+  }
+  
+  /* Styling for drag & drop containers */
+  .example-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .example-list {
+    min-height: 100px;
+    border: 1px dashed #aaa;
+    padding: 5px;
+  }
+  
+  .example-box {
+    padding: 5px;
+    margin: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: move;
+  }
+  
+  /* Style for simulate drag button */
+  .simulate-drag-container {
+    margin-top: 20px;
+  }
+  
+  .btn-simulate-drag {
+    padding: 10px 20px;
+    --background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+
+  /* ===============================
+   General Styling & Reset
+=============================== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* ===============================
+     Grid Layout (if not using Bootstrap)
+  =============================== */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+  }
+  .col-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+  .col-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .col-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  .col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  /* Centering helper */
+  .center-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* ===============================
+     Buttons & Selectors
+  =============================== */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-width: 100%;
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .btn-next,
+  .btn-feedback {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #416ac7;
+    color: white;
+    padding: 0 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 120px;
+    max-width: 200px;
+  }
+  .btn-primary:hover {
+    background-color: #007bff;
+    transform: translateY(-3px);
+  }
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+  .btn-secondary:hover {
+    background-color: #6c757d;
+    transform: translateY(-3px);
+  }
+  .btn-next {
+    background-color: #28a745;
+  }
+  .btn-next:hover {
+    background-color: #218838;
+  }
+  .btn-feedback:hover {
+    background-color: green;
+  }
+  
+  /* Selector (Dropdown) */
+  .selector {
+    background-color: white;
+    color: black;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+  }
+  .selector:focus {
+    outline: none;
+    border: 2px solid #007bff;
+  }
+  
+  select {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+  }
+  select:focus {
+    outline: none;
+    border: 2px solid #007bff;
+  }
+  
+  /* ===============================
+     Question & Instructions
+  =============================== */
+  .question-container {
+    margin: 15px 0;
+    text-align: center;
+    font-family: "Funnel Display", serif !important;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 25px;
+    color: #ffffff;
+  }
+  .question-text {
+    /* Inherits styling from container */
+  }
+  
+  /* Blue animation applied on the question container */
+  .blue-animation {
+    margin: 15px 0;
+    text-align: center;
+    font-family: "Funnel Display", serif !important;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 25px;
+    animation: breathingParsons 10s ease-in-out infinite;
+  }
+  @keyframes breathingParsons {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  /* ===============================
+     Table Show/Hide & Dynamic Content
+  =============================== */
+  .table-show-hide {
+    margin: 20px 0;
+  }
+  .sliding-div {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+    color: white;
+  }
+  .sliding-div.show {
+    max-height: 500px;
+    opacity: 1;
+  }
+  
+  .modal-table-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 17px;
+  }
+  
+  /* Dynamic content styling (using ::ng-deep for Angular) */
+  ::ng-deep .styled-dynamic-content span {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  ::ng-deep .styled-dynamic-content table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    margin: 20px auto;
+  }
+  ::ng-deep .styled-dynamic-content table th {
+    background-color: #416ac7;
+    color: white;
+    padding: 15px;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  ::ng-deep .styled-dynamic-content table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+    font-size: 14px;
+    color: #333;
+  }
+  ::ng-deep .styled-dynamic-content table tr:nth-child(even) td {
+    background-color: #eaf3ff;
+  }
+  ::ng-deep .styled-dynamic-content table tr:hover td {
+    background-color: #d4e4ff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  ::ng-deep .styled-dynamic-content table th:first-child,
+  ::ng-deep .styled-dynamic-content table td:first-child {
+    border-top-left-radius: 10px;
+  }
+  ::ng-deep .styled-dynamic-content table th:last-child,
+  ::ng-deep .styled-dynamic-content table td:last-child {
+    border-top-right-radius: 10px;
+  }
+  ::ng-deep .styled-dynamic-content table {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Table icon inside button */
+  .table-icon {
+    margin-left: 8px;
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* ===============================
+     Professor Hint & Modal
+  =============================== */
+  .professor-hint-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .professor-hint-btn img {
+    height: 40px;
+  }
+  
+  /* (These styles are used by the Professor Speech component) */
+  .professor-modal {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    background-color: blue;
+    border: 3px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    width: 350px;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    text-align: center;
+    background-color: #b6d0f9;
+  }
+  .professor-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  .dialogue-text {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  .navigation-buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .navigation-buttons button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* ===============================
+     Drag & Drop Areas
+  =============================== */
+  .example-container {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border-radius: 5px;
+    min-width: 45%;
+  }
+  .widget-text {
+    font-size: 1.4em;
+    font-weight: 500;
+  }
+  .example-list {
+    min-height: 300px;
+    background-color: #b6d0f9;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 23px -6px gray;
+  }
+  .example-box {
+    position: relative;
+    padding: 10px;
+    padding-top: 20px; /* Extra space for feedback */
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 1.1em;
+    box-shadow: 0 4px 2px -2px gray;
+    cursor: grab;
+    width: 100%;
+    text-align: center;
+    color: black;
+  }
+  
+  /* Feedback styles for dragged items */
+  .feedback-text {
+    font-size: 16px;
+    padding: 2px 5px;
+    margin-top: 2px;
+    border-radius: 3px;
+    text-align: center;
+  }
+  .feedback-correct {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .feedback-incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .drag-number {
+    font-size: 25px;
+    font-weight: bold;
+    color: yellow;
+  }
+  
+  /* ===============================
+     Progress Indicator
+  =============================== */
+  .progress-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .progress-circle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #007bff;
+    border-radius: 25px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border: 2px solid #ccc;
+  }
+  .progress-value {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* ===============================
+     Loading Text
+  =============================== */
+  .loading-text {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    color: #666;
+  }
+  
+  /* Styling for the question container and table */
+.question-container {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .table-show-hide .sliding-div {
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    max-height: 0;
+  }
+  
+  .table-show-hide .sliding-div.show {
+    max-height: 500px; /* Adjust as needed */
+  }
+  
+  .button-container {
+    margin-top: 10px;
+  }
+  
+  /* Styling for the drag & drop example areas */
+  .example-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .example-list {
+    min-height: 100px;
+    border: 1px dashed #aaa;
+    padding: 5px;
+  }
+  
+  .example-box {
+    padding: 5px;
+    margin: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: move;
+  }
+  
+  /* Simulate Drag Button styling */
+  .simulate-drag-container {
+    margin-top: 20px;
+  }
+  
+  .btn-simulate-drag {
+    padding: 10px 20px;
+    --background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Feedback text styling (example) */
+  .feedback-text {
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .feedback-incorrect {
+    color: red;
+  }
+  
+  .feedback-correct {
+    color: green;
+  }
+  
+  /* Progress indicator (example styling) */
+  .progress-indicator {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .progress-circle {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #eee;
+    line-height: 50px;
+    font-weight: bold;
+  }
+  
+  /* ... (existing CSS for question, table, drag-drop, etc.) ... */
+
+/* Highlight style for Get Feedback button */
+/* Existing CSS for question, table, drag-drop areas, etc. */
+/* ... */
+
+/* Highlight style for Toggle Table and Get Feedback buttons */
+.highlight {
+  animation: pulse 2s infinite;
+  border: 2px solid #ff0;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Highlight style for each item in drop area B when feedback is given */
+.item-highlight {
+  animation: itemPulse 2s infinite;
+}
+
+@keyframes itemPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Repeat Tutorial Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: rgb(136, 169, 230);
+  border-radius: 8px;
+  padding: 20px;
+  width: 80vw;
+  max-width: 500px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+  color: white;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: yellow;
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}

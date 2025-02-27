@@ -1,0 +1,18 @@
+<div class="parsons-header">
+  <app-toolbar [username]="username"></app-toolbar>
+</div>
+
+<div class="landing-container">
+  <div class="card shadow-lg rounded landing-card">
+    <div class="card-body">
+      <h1 class="card-title">Hello, {{ username }}!</h1>
+      <p class="card-text">
+        Click the button below to start your journey.
+      </p>
+      <button class="btn btn-primary" (click)="startGame()">Start Game</button>
+    </div>
+  </div>
+</div>
+
+  <app-visual-novel></app-visual-novel>
+

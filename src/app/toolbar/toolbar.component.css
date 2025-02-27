@@ -1,0 +1,81 @@
+/* Toolbar styles */
+.toolbar {
+  background-color: transparent; /* Ensures the toolbar is transparent */
+  --border: 1px solid #ccc; /* Optional: adds a light border around the toolbar for visibility */
+  color: white; /* Sets the text color to white or choose as per your design */
+}
+
+/* User Info styles */
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logout{
+  color: red;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Makes the avatar image rounded */
+  margin-right: 10px;
+}
+
+/* Progress and Achievements styles */
+.progress-and-achievements {
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar {
+  width: 100%; /* Set the width of the progress bar */
+  height: 10px; /* Set the height of the progress bar */
+  border-radius: 5px; /* Rounded corners for the progress bar */
+}
+
+button{
+  color: white;
+
+  --border: solid white 1px;
+  --border-radius: 15%;
+}
+
+/* Button styles */
+button.mat-icon-button, button.mat-button {
+  border: 2px solid #fff; /* White border around the buttons */
+  border-radius: 20px; /* Rounded corners for buttons */
+  background-color: transparent; /* Transparent background for buttons */
+  color: white; /* Button text color */
+}
+
+button.mat-button {
+  padding: 5px 15px;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2, .modal-content p {
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Add additional styles if necessary */

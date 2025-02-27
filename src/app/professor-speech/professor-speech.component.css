@@ -1,0 +1,106 @@
+.professor-modal {
+  position: absolute !important;
+  top: 100px !important;
+  left: 100px !important;
+  width: 320px !important;
+  background-color: #ffffff !important;
+  border: 2px solid #444444 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4) !important;
+  z-index: 1000 !important;
+  cursor: grab !important;
+  overflow: hidden !important;
+}
+
+.modal-header {
+  background: linear-gradient(45deg, #007bff, #0056b3) !important;
+  color: #ffffff !important;
+  padding: 12px 15px !important;
+  cursor: move !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.close-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-size: 24px !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+.modal-content {
+  padding: 20px !important;
+  background-color: #f9f9f9 !important;
+  overflow-x: auto !important;  /* Ensures wide content (like tables) scroll horizontally instead of being cut off */
+}
+
+.professor-avatar {
+  width: 90px !important;
+  height: 90px !important;
+  border-radius: 50% !important;
+  display: block !important;
+  margin: 0 auto 15px auto !important;
+  border: 3px solid #007bff !important;
+}
+
+.dialogue-text {
+  text-align: center !important;
+  margin: 15px 0 !important;
+  font-size: 18px !important;
+  color: #333333 !important;
+  line-height: 1.5 !important;
+}
+
+/* Table Styling */
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 15px 0 !important;
+  background-color: #e9ecef !important;  /* Changed background color from white to a light grey */
+  color: #333333 !important;
+}
+
+table th,
+table td {
+  border: 1px solid #dddddd !important;
+  padding: 8px !important;
+  text-align: left !important;
+  color: #333333 !important;
+
+}
+
+table th {
+  background-color: #007bff !important;
+  color: #ffffff !important;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin-top: 20px !important;
+}
+
+button {
+  padding: 8px 16px !important;
+  background-color: #007bff !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3 !important;
+}
+
+button:disabled {
+  background-color: #cccccc !important;
+  cursor: not-allowed !important;
+}

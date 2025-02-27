@@ -1,0 +1,179 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*toaster */
+/* Custom toast positioning for bottom-right with an offset */
+/* Custom toast positioning for bottom-right with an offset */
+::ng-deep .toast-bottom-right {
+  bottom: 25px !important; /* Adjust vertical position */
+  right: 50px !important; /* Adjust horizontal position */
+}
+
+/* Optional: Custom toast appearance */
+::ng-deep .toast {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+}
+
+
+.parsons-header {
+  max-width: 1000px;
+  margin: 35px auto;
+  text-align: center;
+  color: white;
+}
+
+
+body{
+  font-family: "Funnel Display", serif!important;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 300;
+  --color: black;
+  --background-color: transparent;
+  --image-rendering: pixelated; /* for images */
+  color:rgba(209, 255, 255,1)!important;
+ 
+}
+
+
+
+button{
+  border: 2px dashed white;
+  color:black;
+  background-color: transparent;
+
+
+
+
+  z-index:9;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:20px auto;
+
+  border:2px solid;
+  padding:1em;
+  width:10em;
+  text-align:center;
+  font-weight:700;
+  font-size:1.2em;
+  display:inline-block;
+  text-decoration:none;
+  transition:all 0.2s
+
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  --overflow: hidden; /* Prevent scrolling */
+  overflow-x: hidden;
+  position: relative; /* Allow z-index management */
+}
+
+.background-container {
+  position: fixed; /* Fixed to the viewport */
+  display: block;
+
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure it's behind the app content */
+  overflow: hidden; object-fit: cover; /* Scale to fit the container */
+  transform: scaleX(-1) scaleY(-1); /* Flip horizontally and vertically */
+  transform-origin: center; /* Ensure the flip happens from the center */
+
+
+  
+}
+
+.background-container svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the SVG covers the container */
+  animation: breathing 10s ease-in-out infinite;
+ 
+}
+
+app-root {
+  position: relative;
+  z-index: 1; /* Ensure it stays above the background */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: transparent; /* Allow the background to show */
+}
+
+
+
+button:hover{
+
+  box-shadow: 0 0 10px #eef, 0 0 12px #a0cdff inset;
+  text-shadow: 0 0 12px #489cfa, 0 0 5px #fff;
+}
+
+
+
+  
+
+  .single-page{
+    position:relative;
+    text-align:center;
+    color:red;
+   --overflow: hidden;
+  }
+
+  .single-content{
+    color: black;
+    min-height: 45vh;
+  }
+
+
+
+ 
+
+
+
+
+
+
+.app-root, .single-content {
+  position: relative; /* This ensures they are positioned in the flow and can use z-index */
+}
+
+
+
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1); /* Maintains original size */
+  }
+  50% {
+    transform: scale(1.1); /* Slightly larger */
+  }
+}
+
+
+@keyframes fadeBlink {
+  0%, 100% {
+    opacity: 1; 
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.background-container svg path {
+  animation: fadeBlink 8s ease-in-out infinite;
+}
+
+.background-container svg path:nth-child(1) { animation-delay: 6s; }
+.background-container svg path:nth-child(2) { animation-delay: 4s; }
+.background-container svg path:nth-child(3) { animation-delay: 2s; }
+.background-container svg path:nth-child(4) { animation-delay: 0s; }
+
+
+

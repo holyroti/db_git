@@ -1,0 +1,136 @@
+<!-- Step Explanation -->
+<div class="row">
+  <div class="col-12">
+    <div class="question-container blue-animation">
+      <span class="question-text">
+        {{ currentStepText }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Table Section -->
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <div class="table-show-hide">
+      <!-- Sliding Div for the table -->
+      <div class="sliding-div" [class.show]="showTable">
+        <div class="modal-table-content styled-dynamic-content">
+          <table>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+            </tr>
+            <tr>
+              <td>Data 1</td>
+              <td>Data 2</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- Toggle Button for showing/hiding the table -->
+      <div class="button-container">
+        <button class="btn-primary" (click)="toggleTable()"
+                [ngClass]="{'highlight': highlightToggleTableButton}">
+          {{ showTable ? 'Hide' : 'Show' }} Table
+          <img src="/assets/images/table.png" class="table-icon" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 center-items"></div>
+</div>
+
+<!-- Drag & Drop Areas -->
+<div class="row">
+  <div class="col-12 d-flex">
+    <!-- Left drop list -->
+     <div class="col-2"></div>
+    <div class="col-4">
+      <div class="example-container">
+        <span class="widget-text">Drag from here..</span>
+        <div
+          cdkDropList
+          id="trashList"
+          [cdkDropListData]="codeItems"
+          [cdkDropListConnectedTo]="['sortableList']"
+          class="example-list"
+          cdkDropListSortingEnabled
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let item of codeItems" cdkDrag class="example-box" [@itemAnimation]>
+            {{ item.text }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right drop list -->
+    <div class="col-4">
+      <div class="example-container">
+        <span class="widget-text">
+          Drop items here ({{ currentItems.length }} of {{ requiredCount }})...
+        </span>
+        <div
+          cdkDropList
+          id="sortableList"
+          [cdkDropListData]="currentItems"
+          [cdkDropListConnectedTo]="['trashList']"
+          class="example-list"
+          cdkDropListSortingEnabled
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let item of currentItems" cdkDrag class="example-box" [@itemAnimation]
+               [ngClass]="{'item-highlight': feedbackGiven}">
+            {{ item.text }}
+            <div *ngIf="feedbackGiven" class="feedback-text"
+              [ngClass]="{
+                'feedback-correct': highlightedStatus[item.codeLineId] === 'correct',
+                'feedback-incorrect': highlightedStatus[item.codeLineId] === 'incorrect'
+              }">
+              {{ feedbackMessages[item.codeLineId] || 'No feedback available' }}
+            </div>
+          </div>
+        </div>
+        <!-- Progress indicator -->
+        <div class="progress-indicator">
+          <div class="progress-circle">
+            <span class="progress-value">{{ currentItems.length }}/{{ requiredCount }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+
+  </div>
+</div>
+
+<!-- Manual Simulate Drag Button (hidden if autoSimulate is true) -->
+<div class="simulate-drag-container" style="text-align: center; margin: 20px;" *ngIf="!autoSimulate">
+  <button class="btn-simulate-drag simulate-drag-btn" (click)="simulateDrag()">
+    Simulate Drag
+  </button>
+</div>
+
+<!-- Get Feedback Button: Highlighted when simulation is complete -->
+<div class="button-container" style="text-align: center; margin: 20px;">
+  <button class="btn-primary btn-feedback" (click)="getFeedback()"
+          [ngClass]="{'highlight': highlightGetFeedback}">
+    Get Feedback
+  </button>
+</div>
+
+<!-- Repeat Tutorial Modal Overlay -->
+<div class="modal-overlay" *ngIf="showRepeatModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Repeat Tutorial?</h2>
+      <button class="close-btn" (click)="showRepeatModal = false">×</button>
+    </div>
+    <div class="modal-body">
+      <p>Would you like to repeat the tutorial?</p>
+      <button class="btn-primary" (click)="repeatTutorial()">Repeat</button>
+    </div>
+  </div>
+</div>

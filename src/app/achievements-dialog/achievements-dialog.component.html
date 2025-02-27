@@ -1,0 +1,10 @@
+<div class="modal-overlay" (click)="close()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Your Achievements</h2>
+      <div class="badges">
+        <img *ngFor="let badge of badges" [src]="badge.image" [alt]="badge.name" title="{{ badge.name }}">
+      </div>
+      <button mat-button color="primary" (click)="close()">Close</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,76 @@
+<div class="vn-container">
+  <img [src]="currentBackground" class="background" alt="Background">
+  <img [src]="currentCharacter" class="character" alt="Character">
+
+  <div class="dialogue-box">
+    <p>{{ currentDialogue.text }}</p>
+
+    <iframe 
+      *ngIf="currentDialogue.videoUrl" 
+      [src]="sanitizeUrl(currentDialogue.videoUrl)" 
+      width="560" 
+      height="315" 
+      frameborder="0" 
+      allowfullscreen>
+    </iframe>
+
+    <img 
+      *ngIf="currentDialogue.imageUrl" 
+      [src]="currentDialogue.imageUrl" 
+      alt="Additional Image" 
+      style="max-width: 100%; max-height: 300px; margin: 10px 0;" 
+    />
+
+    <div *ngIf="currentDialogue.choices?.length">
+      <button *ngFor="let choice of currentDialogue.choices" (click)="advanceDialogue(choice.next)">
+        {{ choice.text }}
+      </button>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+      <button (click)="previousDialogue()">Vorige</button>
+      <button 
+        *ngIf="!currentDialogue.choices || currentDialogue.choices.length === 0" 
+        (click)="advanceDialogue()">
+        Volgende
+      </button>
+    </div>
+
+    <table *ngIf="currentDialogue?.table">
+      <thead>
+        <tr>
+          <th *ngFor="let header of currentDialogue?.table?.headers">{{ header }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of currentDialogue?.table?.rows">
+          <td *ngFor="let cell of row">
+            <ng-container *ngIf="isNestedTable(cell); else plainText">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let nestedHeader of cell.headers">{{ nestedHeader }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let nestedRow of cell.rows">
+                    <td *ngFor="let nestedCell of nestedRow">{{ nestedCell }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <ng-template #plainText>{{ cell }}</ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="currentAchievement" class="achievement-modal">
+    <h2>{{ currentAchievement.title }}</h2>
+    <img [src]="currentAchievement.badgeImage" alt="Achievement Badge" />
+    <p>{{ currentAchievement.description }}</p>
+    <button (click)="closeAchievementModal()">Doorgaan</button>
+  </div>
+</div>

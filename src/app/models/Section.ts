@@ -1,0 +1,8 @@
+export enum Section {
+  NF1_EASY = 1,
+  NF1_INTERMEDIATE = 2,
+  NF2_EASY = 3,
+  NF2_INTERMEDIATE = 4,
+  NF3_EASY = 5,
+  NF3_INTERMEDIATE = 6,
+}

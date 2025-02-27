@@ -1,0 +1,51 @@
+.landing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* Full height to center the card */
+  background-color: transparent; /* Light background for contrast */
+  color: black;
+}
+
+.landing-card {
+  width: 50%; /* Big card with enough space for future content */
+  padding: 30px; /* Add padding for spacious content */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: white; /* Ensure the card stands out */
+  text-align: center;
+}
+
+.landing-card h1 {
+  font-size: 2.5rem; /* Large title */
+  margin-bottom: 15px;
+}
+
+.landing-card p {
+  font-size: 1.2rem; /* Readable subtitle */
+  margin-bottom: 25px;
+}
+
+button {
+  padding: 12px 25px; /* Larger button for easy interaction */
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  border-radius: 10px; /* Rounded button corners */
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow on hover */
+}
+
+  
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+  }
