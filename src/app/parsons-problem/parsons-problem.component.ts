@@ -21,10 +21,10 @@ import { VisualNovelComponent } from '../visual-novel/visual-novel.component';
 })
 export class ParsonsProblemComponent implements OnInit {
   username: string = JSON.parse(sessionStorage.getItem('loggedInUser') || '{}').username || 'Guest';
-  selectedSection: number = 3; // Default section
+  selectedSection: number = 1; // Default section
   questions: Question[] = [];
   selectedQuestionId: number | null = null; // Pass questionId instead of full question
-  stage: number = 3; // 1 = Component 1 (0-1NF), 2 = Component 2 (1-2NF)
+  stage: number = 1; // 1 = Component 1 (0-1NF), 2 = Component 2 (1-2NF)
 
   showSummary: boolean = true;
   constructor(private questionService: QuestionService) {}

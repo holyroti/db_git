@@ -1,0 +1,2 @@
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="C:\Users\rohit\Desktop\db_normalization\src\assets\Wallet_parsons")))
+SSL_SERVER_DN_MATCH=yes
